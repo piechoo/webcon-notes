@@ -16,6 +16,10 @@
     width: 30%;
     font-size: 2em;
 }
+.small{
+    width: 50%;
+    font-size: 1em;
+}
 
 .text-link {
     color: inherit;

@@ -1,0 +1,16 @@
+form{
+    margin-top: 3%;
+}
+p{
+    font-size: 1.2em;
+    padding: 0.5%;
+}
+input, textarea{
+    width:30%;
+    padding: 1%;
+    border-radius: 15px;
+    border: none;
+}
+:focus {
+    outline: none;
+}

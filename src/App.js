@@ -25,7 +25,7 @@ let simplenote2 = {
 }
 
 const Home =()=>(
-    <div className="main">
+    <div >
         <SearchBar></SearchBar>
         <AddNoteButton></AddNoteButton>
         <GetRequest></GetRequest>
@@ -68,12 +68,12 @@ const Home =()=>(
     );
 
   return (
-      <div>
+      <div className="main">
+          <Link to="/" className='home-link' > <b>WEBCON Notes</b> </Link>
           <Switch>
               <Route exact path="/"><Home /></Route>
               <Route path="/createnote"><AddNote /></Route>
           </Switch>
-
       </div>
   );
 }

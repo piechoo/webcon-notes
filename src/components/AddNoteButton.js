@@ -1,18 +1,8 @@
 import React from "react";
 import "./Button.css"
-import { Link, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class AddNoteButton extends React.Component {
-
-
-    create = () => {
-        this.setState(({ checked }) => (
-            {
-                checked: !checked,
-            }
-        ));
-
-    }
 
     render() {
         return (

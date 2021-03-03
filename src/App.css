@@ -9,3 +9,8 @@
   min-height: 100vh;
   text-align: center;
 }
+.home-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: 3em;
+}

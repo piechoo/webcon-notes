@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './Note.css'
 import Tags from "./Tags";
+import "./Button.css"
 
 class Note extends React.Component {
     constructor(props) {
@@ -51,9 +52,9 @@ class Note extends React.Component {
                                     <Tags tags = {this.props.tags}></Tags>
                                 </div>
                                 <div className="buttons">
-                                    <button className="btn1">Edytuj notatkę</button>
-                                    <button className="btn2">Dodaj tag</button>
-                                    <button className="btn2">Usuń notatkę</button>
+                                    <button className="buton small">Edytuj notatkę</button>
+                                    <button className="buton small">Dodaj tag</button>
+                                    <button className="buton small">Usuń notatkę</button>
                                 </div>
                             </div>
                                 </td>

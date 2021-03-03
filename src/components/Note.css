@@ -14,14 +14,11 @@
     vertical-align: top;
     width: 30%;
     display:table-cell;
-
 }
 .buttons button{
     display: block;
     margin-bottom: 2%;
-    margin-left: 4%;
-    width: 80%;
-
+    margin-left: 20%;
 }
 [id='toggle-heart'] {
     position: absolute;

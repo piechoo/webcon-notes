@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-
+import "./Form.css"
+import "./Button.css"
 
 class AddNoteForm extends Component {
 
@@ -9,28 +10,44 @@ class AddNoteForm extends Component {
             title: '',
             tags: '',
             content: '',
-            companyName: ''
+            success: false
         };
-    }
-    mySubmitHandler = (event) => {
-        event.preventDefault();
-        alert("You are submitting " + this.state.content);
-    }
-    myChangeHandler = (event) => {
-        let title = event.target.title;
-        let tags = event.target.tags;
-        let content = event.target.content;
-        this.setState({
-            title,
-            tags,
-            content
-        });
     }
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        alert("You are submitting " + this.state.content);
+        this.addnote()
     };
+
+    addnote= () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                tags: this.state.tags,
+                fav: false,
+                title: this.state.title,
+                content: this.state.content
+            })
+        };
+        fetch('http://localhost:3000/notes', requestOptions)
+            .then(async response => {
+                const data = await response.json();
+
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                this.setState({ success: true })
+                alert("Dodano " + response.body)
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
+}
 
     render() {
         return (
@@ -51,14 +68,13 @@ class AddNoteForm extends Component {
                     required
                 />
                 <p>Wpisz zawartość notatki:</p>
-                <input
-                    type="textarea"
+                <textarea
                     onChange={event => this.setState({ content: event.target.value })}
                     placeholder="Zawartość "
                     required
                 />
                 <br/>
-                <button>Utwórz!</button>
+                <button className="buton big">Utwórz!</button>
             </form>
         );
     }
