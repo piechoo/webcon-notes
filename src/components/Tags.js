@@ -14,7 +14,6 @@ class Tags extends Component {
     }
     split() {
         let splited = this.props.tags.split(',');
-        console.log(splited)
         this.setState({
             tags: splited
         });

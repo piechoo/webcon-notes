@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './Note.css'
 import Tags from "./Tags";
 import "./Button.css"
+import { withRouter } from 'react-router-dom';
 
 class Note extends React.Component {
     constructor(props) {
@@ -15,10 +16,20 @@ class Note extends React.Component {
 
     }
 
+    routeChange=()=> {
+        this.props.history.push("/editnote");
+    }
+
+
     toggle() {
         this.setState({
             open: !this.state.open
         });
+    }
+
+    deletenote = () => {
+        fetch(`http://localhost:3000/notes/${this.props.id}`, { method: 'DELETE' }).then(this.props.handler())
+
     }
     toggleCheckboxChange = () => {
         this.setState(({ checked }) => (
@@ -45,18 +56,18 @@ class Note extends React.Component {
                             </tr>
                             <tr>
                                 <td colSpan="3" >
-                            <div id="demo" className={"collapse" + (this.state.open ? ' in' : '')}>
+                                    <div id="demo" className={"collapse" + (this.state.open ? ' in' : '')}>
 
-                                <div className="content">
-                                    {this.props.content}
-                                    <Tags tags = {this.props.tags}></Tags>
-                                </div>
-                                <div className="buttons">
-                                    <button className="buton small">Edytuj notatkę</button>
-                                    <button className="buton small">Dodaj tag</button>
-                                    <button className="buton small">Usuń notatkę</button>
-                                </div>
-                            </div>
+                                        <div className="content">
+                                            {this.props.content}
+                                            <Tags tags = {this.props.tags}></Tags>
+                                        </div>
+                                        <div className="buttons">
+                                            <button className="buton small" onClick={this.routeChange.bind(this)}>Edytuj notatkę</button>
+                                            <button className="buton small">Dodaj tag</button>
+                                            <button className="buton small" onClick={this.deletenote}>Usuń notatkę</button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
 
@@ -69,4 +80,4 @@ class Note extends React.Component {
 
 };
 
-export default Note
+export default withRouter(Note)

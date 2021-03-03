@@ -4,6 +4,10 @@ import '../App.css'
 
 
 class AddNote extends Component {
+
+
+
+
     render() {
         return (
             <div className='main'>

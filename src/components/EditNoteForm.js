@@ -2,11 +2,12 @@ import React, {Component} from "react";
 import "./Form.css"
 import "./Button.css"
 
-class AddNoteForm extends Component {
+class EditNoteForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             title: '',
             tags: '',
             content: '',
@@ -19,18 +20,19 @@ class AddNoteForm extends Component {
         this.addnote()
     };
 
-    addnote= () => {
+    editnote= () => {
         const requestOptions = {
-            method: 'POST',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+                id: this.state.id,
                 tags: this.state.tags,
-                fav: false,
+                fav: this.props.fav,
                 title: this.state.title,
                 content: this.state.content
             })
         };
-        fetch('http://localhost:3000/notes', requestOptions)
+        fetch(`http://localhost:3000/notes/${this.props.id}`, requestOptions)
             .then(async response => {
                 const data = await response.json();
 
@@ -41,7 +43,7 @@ class AddNoteForm extends Component {
                     return Promise.reject(error);
                 }
                 this.setState({ success: true })
-                alert("Dodano " + response.body)
+                alert("edytowano " + response.body)
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });
@@ -57,7 +59,7 @@ class AddNoteForm extends Component {
                     type="text"
                     name="title"
                     onChange={event => this.setState({ title: event.target.value })}
-                    placeholder="Tytuł "
+                    placeholder={this.props.title}
                     required
                 />
                 <br/>
@@ -65,21 +67,21 @@ class AddNoteForm extends Component {
                 <input
                     type="text"
                     onChange={event => this.setState({ tags: event.target.value })}
-                    placeholder="Tagi "
+                    placeholder={this.props.tags}
                     required
                 />
                 <br/>
                 <label>Wpisz zawartość notatki:<br/></label>
                 <textarea
                     onChange={event => this.setState({ content: event.target.value })}
-                    placeholder="Zawartość "
+                    placeholder={this.props.content}
                     required
                 />
                 <br/>
-                <button className="buton big">Utwórz!</button>
+                <button className="buton big">Edytuj!</button>
             </form>
         );
     }
 }
 
-export default AddNoteForm
+export default EditNoteForm

@@ -7,6 +7,8 @@ import SearchBar from "./components/SearchBar";
 import AddNoteButton from "./components/AddNoteButton";
 import { Link, Route, Switch } from "react-router-dom";
 import AddNote from "./components/AddNote";
+import NoteList from "./components/NoteList";
+import EditNoteForm from "./components/EditNoteForm";
 
 function App() {
 let simplenote = {
@@ -28,36 +30,9 @@ const Home =()=>(
     <div >
         <SearchBar></SearchBar>
         <AddNoteButton></AddNoteButton>
-        <GetRequest></GetRequest>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
 
-        <Note title ={simplenote2.title} id={simplenote2.id} fav={simplenote2.fav} content={simplenote2.content} tags={simplenote2.tags}></Note>
-        <Note title ={simplenote2.title} id={simplenote2.id} fav={simplenote2.fav} content={simplenote2.content} tags={simplenote2.tags}></Note>
-        <Note title ={simplenote2.title} id={simplenote2.id} fav={simplenote2.fav} content={simplenote2.content} tags={simplenote2.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote2.title} id={simplenote2.id} fav={simplenote2.fav} content={simplenote2.content} tags={simplenote2.tags}></Note>
-        <Note title ={simplenote2.title} id={simplenote2.id} fav={simplenote2.fav} content={simplenote2.content} tags={simplenote2.tags}></Note>
-        <Note title ={simplenote2.title} id={simplenote2.id} fav={simplenote2.fav} content={simplenote2.content} tags={simplenote2.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote2.title} id={simplenote2.id} fav={simplenote2.fav} content={simplenote2.content} tags={simplenote2.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
-        <Note title ={simplenote.title} id={simplenote.id} fav={simplenote.fav} content={simplenote.content} tags={simplenote.tags}></Note>
+        <NoteList></NoteList>
+
     </div>
         );
 
@@ -73,6 +48,7 @@ const Home =()=>(
           <Switch>
               <Route exact path="/"><Home /></Route>
               <Route path="/createnote"><AddNote /></Route>
+              <Route path="/editnote"><EditNoteForm /></Route>
           </Switch>
       </div>
   );
