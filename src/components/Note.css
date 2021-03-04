@@ -4,7 +4,6 @@
     margin: 0px 10px;
     border-radius: 4px;
 }
-
 .content {
     width: 100%;
     display:table-cell;
@@ -20,29 +19,25 @@
     margin-bottom: 2%;
     margin-left: 20%;
 }
-[id='toggle-heart'] {
+input[type="checkbox"] {
     position: absolute;
     left: -100vw;
 }
-[for='toggle-heart'] {
+.serce {
     color: #aab8c2;
-}
-
-[id='toggle-heart']:checked + label {
-    color: #e2264d;
-}
-#serce{
-    font-size: 2em;
     cursor: pointer;
+    font-size: 2em;
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+.checked {
+    color: #e2264d ;
+}
 .collapse {
     display: none
 }
-
 .collapse.in {
     min-width: 100%;
     display: table;
@@ -60,9 +55,6 @@ table{
      cursor: pointer;
 }
 
- td{
-
- }
 
 
 

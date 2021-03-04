@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import './Note.css'
 import Tags from "./Tags";
 import "./Button.css"
-import { withRouter } from 'react-router-dom';
+import ModalEditNote from "./ModalEditNote";
+
 
 class Note extends React.Component {
     constructor(props) {
@@ -11,15 +12,23 @@ class Note extends React.Component {
         // Initial state
         this.state = {
             open: false,
-            checked: props.fav
+            checked: props.fav,
+            showModal:false
         };
+        this.sonResponse = this.sonResponse.bind(this);
+        this.changeModal = this.changeModal.bind(this)
 
     }
+    changeModal = () => {
+        this.setState({ showModal: !this.state.showModal });
+    };
 
-    routeChange=()=> {
-        this.props.history.push("/editnote");
+
+    sonResponse (err, res) {
+        this.props.handler()
+        //console.log(this.props.tags)
+        //console.log(res)
     }
-
 
     toggle() {
         this.setState({
@@ -31,12 +40,32 @@ class Note extends React.Component {
         fetch(`http://localhost:3000/notes/${this.props.id}`, { method: 'DELETE' }).then(this.props.handler())
 
     }
-    toggleCheckboxChange = () => {
-        this.setState(({ checked }) => (
-            {
-                checked: !checked,
-            }
-        ));
+    toggleCheckboxChange()  {
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: this.props.id,
+                tags: this.props.tags,
+                fav: !this.state.checked,
+                title: this.props.title,
+                content: this.props.content
+            })
+        };
+        fetch(`http://localhost:3000/notes/${this.props.id}`, requestOptions)
+            .then(async response => {
+                this.setState({
+                        checked: !this.state.checked,
+                    }
+                );
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
+
+
 
     }
 
@@ -50,8 +79,10 @@ class Note extends React.Component {
                                 <th onClick={this.toggle.bind(this)}>{this.props.id} </th>
                                 <th onClick={this.toggle.bind(this)}>{this.props.title} </th>
                                 <th>
-                                    <input id="toggle-heart" type="checkbox" checked={this.state.checked ? 'checked' : ""} onChange={this.toggleCheckboxChange.bind(this)}/>
-                                    <label id='serce' htmlFor="toggle-heart">❤</label>
+                                    <label className={this.state.checked ? 'checked serce' : 'serce'}>
+                                        <input className="toggle-heart" type="checkbox" checked={this.state.checked ? 'checked' : ""} onChange={this.toggleCheckboxChange.bind(this)}/>
+                                        ❤
+                                    </label>
                                 </th>
                             </tr>
                             <tr>
@@ -60,11 +91,11 @@ class Note extends React.Component {
 
                                         <div className="content">
                                             {this.props.content}
-                                            <Tags tags = {this.props.tags}></Tags>
+                                            <Tags key={this.props.tags} tags = {this.props.tags}></Tags>
                                         </div>
                                         <div className="buttons">
-                                            <button className="buton small" onClick={this.routeChange.bind(this)}>Edytuj notatkę</button>
                                             <button className="buton small">Dodaj tag</button>
+                                            <ModalEditNote id={this.props.id} title={this.props.title} tags={this.props.tags} content={this.props.content} fav={this.props.fav} handler={this.sonResponse.bind(this)}></ModalEditNote>
                                             <button className="buton small" onClick={this.deletenote}>Usuń notatkę</button>
                                         </div>
                                     </div>
@@ -80,4 +111,4 @@ class Note extends React.Component {
 
 };
 
-export default withRouter(Note)
+export default Note

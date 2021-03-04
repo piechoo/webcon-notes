@@ -10,8 +10,8 @@ class Tags extends Component {
             tags : []
         }
         this.split = this.split.bind(this);
-
     }
+
     split() {
         let splited = this.props.tags.split(',');
         this.setState({
@@ -26,7 +26,7 @@ class Tags extends Component {
         return (
             <div className='tagContainer'>
                 {this.state.tags.map((tag) => (
-                    <div className='tag'>{tag}</div>
+                    <div key={tag} className='tag'>{tag}</div>
                 ))}
             </div>
         );

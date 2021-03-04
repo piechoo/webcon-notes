@@ -8,16 +8,46 @@ class EditNoteForm extends Component {
         super(props);
         this.state = {
             id: '',
+            fav: '',
             title: '',
             tags: '',
             content: '',
-            success: false
+            success: 'tag'
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentDidMount () {
+        // this route should only be avaleable from a popup
+        const query = new URLSearchParams(window.location.search);
+        console.log(query.get('content'))
+        this.setState({
+            id: query.get('id'),
+            content: query.get('content'),
+            title: query.get('title'),
+            tags: query.get('tags'),
+            fav: query.get('fav'),
+        });
+
+        if (!window.opener) {
+            window.close();
+        }
+    }
+
+    onChangeHandler () {
+        const {value} = 'zmiana';
+
+        this.setState({message: value});
+
+        // we use the `opener` object that lives on a parent window
+        // this object only exists if the current window has a child.
+        window.opener.onSuccess(value)
+    }
+
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        this.addnote()
+        this.editnote()
     };
 
     editnote= () => {
@@ -32,18 +62,11 @@ class EditNoteForm extends Component {
                 content: this.state.content
             })
         };
-        fetch(`http://localhost:3000/notes/${this.props.id}`, requestOptions)
+        fetch(`http://localhost:3000/notes/${this.state.id}`, requestOptions)
             .then(async response => {
-                const data = await response.json();
-
-                // check for error response
-                if (!response.ok) {
-                    // get error message from body or default to response status
-                    const error = (data && data.message) || response.status;
-                    return Promise.reject(error);
-                }
                 this.setState({ success: true })
-                alert("edytowano " + response.body)
+                window.opener.onSuccess(this.state.tags)
+                window.close();
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });
@@ -53,13 +76,13 @@ class EditNoteForm extends Component {
 
     render() {
         return (
+            <div>
             <form onSubmit={this.handleSubmit}>
                 <label>Wpisz tytuł notatki:<br/></label>
                 <input
                     type="text"
-                    name="title"
                     onChange={event => this.setState({ title: event.target.value })}
-                    placeholder={this.props.title}
+                    value={this.state.title}
                     required
                 />
                 <br/>
@@ -67,19 +90,23 @@ class EditNoteForm extends Component {
                 <input
                     type="text"
                     onChange={event => this.setState({ tags: event.target.value })}
-                    placeholder={this.props.tags}
+                    value={this.state.tags}
                     required
                 />
                 <br/>
                 <label>Wpisz zawartość notatki:<br/></label>
                 <textarea
                     onChange={event => this.setState({ content: event.target.value })}
-                    placeholder={this.props.content}
+                    value={this.state.content}
                     required
                 />
                 <br/>
-                <button className="buton big">Edytuj!</button>
+                <button className="buton big giga">Edytuj</button>
             </form>
+                <button className="buton big"  onClick={() =>{window.close()}} >Anuluj</button>
+
+
+            </div>
         );
     }
 }

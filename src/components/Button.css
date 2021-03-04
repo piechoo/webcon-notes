@@ -2,19 +2,17 @@
     background-color: #edf2fb ;
     border:none;
     cursor: pointer;
-
-
 }
-
 .big{
-    margin: 2%;
-    padding: 1%;
+
+    padding: 2%;
     margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
     width: 30%;
-    font-size: 2em;
+    font-size: 1.5em;
     border-radius: 30px;
+}
+.giga{
+    margin-bottom: 3%;
 }
 .small{
     width: 50%;
@@ -25,4 +23,5 @@
 .text-link {
     color: inherit;
     text-decoration: inherit;
+
 }

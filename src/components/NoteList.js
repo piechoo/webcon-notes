@@ -33,10 +33,7 @@ class NoteList extends Component {
                     self.setState({
                         note,
                         isLoading: false
-                    },() => {
-                        console.log(this.state.note, 'dealersOverallTotal1');})
-
-                },
+                    })},
                 err => {
                     this.setState({
                         err,
