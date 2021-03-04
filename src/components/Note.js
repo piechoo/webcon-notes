@@ -70,14 +70,15 @@ class Note extends React.Component {
     }
 
     render() {
+
         return (
             <div className="note">
                 <div className="btn btn-block" >
                     <table>
                         <tbody>
                             <tr>
-                                <th onClick={this.toggle.bind(this)}>{this.props.id} </th>
-                                <th onClick={this.toggle.bind(this)}>{this.props.title} </th>
+
+                                <th className='title' onClick={this.toggle.bind(this)}>{this.props.title} </th>
                                 <th>
                                     <label className={this.state.checked ? 'checked serce' : 'serce'}>
                                         <input className="toggle-heart" type="checkbox" checked={this.state.checked ? 'checked' : ""} onChange={this.toggleCheckboxChange.bind(this)}/>
@@ -86,9 +87,8 @@ class Note extends React.Component {
                                 </th>
                             </tr>
                             <tr>
-                                <td colSpan="3" >
+                                <td colSpan="2" >
                                     <div id="demo" className={"collapse" + (this.state.open ? ' in' : '')}>
-
                                         <div className="content">
                                             {this.props.content}
                                             <Tags key={this.props.tags} tags = {this.props.tags}></Tags>

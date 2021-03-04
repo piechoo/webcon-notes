@@ -1,0 +1,36 @@
+.searchBox{
+
+    padding: 0;
+
+}
+#multiselectContainerReact {
+    background-color: white;
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid gray;
+    border-radius: 8px;
+
+}
+.search-wrapper{
+    border: none;
+    border-radius: 0;
+}
+.InputField{
+margin: 5px;
+    background-color: #61dafb;
+}
+#inputField{
+    margin: 50px;
+}
+.highlight{
+    background: #6b94ff;
+}
+.option:hover{
+    background: #6b94ff;
+}
+.chip{
+    background: #6b94ff;
+
+}
+
+

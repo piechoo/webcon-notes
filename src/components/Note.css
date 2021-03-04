@@ -5,19 +5,19 @@
     border-radius: 4px;
 }
 .content {
-    width: 100%;
+    width: 80%;
     display:table-cell;
     float: left;
 }
 .buttons{
     vertical-align: top;
-    width: 30%;
+    width:30%;
     display:table-cell;
 }
 .buttons button{
     display: block;
     margin-bottom: 2%;
-    margin-left: 20%;
+
 }
 input[type="checkbox"] {
     position: absolute;
@@ -52,8 +52,10 @@ table{
 }
  th {
     padding: 5px;
-     cursor: pointer;
 }
+ .title{
+     cursor: pointer;
+ }
 
 
 

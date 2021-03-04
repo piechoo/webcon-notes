@@ -51,7 +51,6 @@ class ModalEditNote extends Component {
         fetch(`http://localhost:3000/notes/${this.state.id}`, requestOptions)
             .then(async response => {
                 this.props.handler()
-                fc()
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });

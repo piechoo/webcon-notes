@@ -9,12 +9,22 @@ import { Link, Route, Switch } from "react-router-dom";
 import AddNote from "./components/AddNote";
 import NoteList from "./components/NoteList";
 import EditNoteForm from "./components/EditNoteForm";
+import { Multiselect } from 'multiselect-react-dropdown';
+import Home from "./components/Home";
 
 function App() {
 
 
-const Home =()=>(
+
+const Homes =()=>(
     <div >
+        <Multiselect
+            options={this.state.options} // Options to display in the dropdown
+            selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+            onSelect={this.onSelect} // Function will trigger on select event
+            onRemove={this.onRemove} // Function will trigger on remove event
+            displayValue="name" // Property name to display in the dropdown options
+        />
         <SearchBar></SearchBar>
         <AddNoteButton></AddNoteButton>
         <NoteList></NoteList>
