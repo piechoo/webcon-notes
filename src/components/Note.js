@@ -5,11 +5,10 @@ import "./Button.css"
 import ModalEditNote from "./ModalEditNote";
 
 
-class Note extends React.Component {
+class Note extends Component {
     constructor(props) {
         super(props);
 
-        // Initial state
         this.state = {
             open: false,
             checked: props.fav,
@@ -26,11 +25,9 @@ class Note extends React.Component {
 
     sonResponse (err, res) {
         this.props.handler()
-        //console.log(this.props.tags)
-        //console.log(res)
     }
 
-    toggle() {
+    dropdown() {
         this.setState({
             open: !this.state.open
         });
@@ -40,6 +37,7 @@ class Note extends React.Component {
         fetch(`http://localhost:3000/notes/${this.props.id}`, { method: 'DELETE' }).then(this.props.handler())
 
     }
+
     toggleCheckboxChange()  {
 
         const requestOptions = {
@@ -53,20 +51,19 @@ class Note extends React.Component {
                 content: this.props.content
             })
         };
+
         fetch(`http://localhost:3000/notes/${this.props.id}`, requestOptions)
             .then(async response => {
                 this.setState({
                         checked: !this.state.checked,
                     }
                 );
+                this.props.handler()
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });
                 console.error('There was an error!', error);
             });
-
-
-
     }
 
     render() {
@@ -77,8 +74,7 @@ class Note extends React.Component {
                     <table>
                         <tbody>
                             <tr>
-
-                                <th className='title' onClick={this.toggle.bind(this)}>{this.props.title} </th>
+                                <th className='title' onClick={this.dropdown.bind(this)}>{this.props.title} </th>
                                 <th>
                                     <label className={this.state.checked ? 'checked serce' : 'serce'}>
                                         <input className="toggle-heart" type="checkbox" checked={this.state.checked ? 'checked' : ""} onChange={this.toggleCheckboxChange.bind(this)}/>
@@ -88,27 +84,24 @@ class Note extends React.Component {
                             </tr>
                             <tr>
                                 <td colSpan="2" >
-                                    <div id="demo" className={"collapse" + (this.state.open ? ' in' : '')}>
+                                    <div className={"collapse" + (this.state.open ? ' in' : '')}>
                                         <div className="content">
                                             {this.props.content}
                                             <Tags key={this.props.tags} tags = {this.props.tags}></Tags>
                                         </div>
                                         <div className="buttons">
-                                            <button className="buton small">Dodaj tag</button>
                                             <ModalEditNote id={this.props.id} title={this.props.title} tags={this.props.tags} content={this.props.content} fav={this.props.fav} handler={this.sonResponse.bind(this)}></ModalEditNote>
                                             <button className="buton small" onClick={this.deletenote}>Usuń notatkę</button>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
             </div>
         );
     }
-
 };
 
 export default Note

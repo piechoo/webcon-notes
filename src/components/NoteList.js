@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Note from "./Note";
-import equal from 'fast-deep-equal'
 
 class NoteList extends Component {
 
@@ -17,12 +16,12 @@ class NoteList extends Component {
     }
 
     handler =()=> {
-        if(this.state.option=='')
+        if(this.state.option==='')
             this.getnotes()
         else
             this.gettag(this.state.option)
     }
-    async getnotes(){
+     getnotes(){
         this.setState({ isLoading: true })
         let api_url = 'http://localhost:3000/notes';
         fetch(api_url)
@@ -47,11 +46,10 @@ class NoteList extends Component {
     }
 
 
-    async gettag(opt){
-
+    gettag(opt){
         this.setState({ isLoading: true })
         let api_url = '';
-        if(opt!="Polubione Notatki")
+        if(opt!=="Polubione Notatki")
             api_url = `http://localhost:3000/notes/tags/${opt}`;
         else
             api_url = `http://localhost:3000/notes/favourites`;
@@ -80,16 +78,15 @@ class NoteList extends Component {
         this.getnotes()
     }
 
-    componentDidUpdate(prevProps) {
-        console.log("stare " + this.state.option+" "+ this.props.options)
-        if(this.state.option!=this.props.options && (this.props.options!==''))
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.option!==this.props.options && (this.props.options!==''))
         {
             this.setState({
                 option: this.props.options
             })
             this.gettag(this.props.options)
         }
-        else if(this.props.options==='' && this.state.option!=this.props.options)
+        else if(this.props.options==='' && this.state.option!==this.props.options)
             this.getnotes()
     }
 

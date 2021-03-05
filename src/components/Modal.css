@@ -4,7 +4,6 @@
     border-radius: 12px 12px 0 0;
 }
 .modal > .header {
-    width: 100%;
     border-bottom: 1px solid gray;
     font-size: 2em;
     text-align: center;
@@ -42,3 +41,23 @@ textarea{
     height: 100px;
 }
 
+@media only screen and (max-width: 1025px) {
+
+    .popup-content {
+        margin: 10% auto !important;
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .modal > .header {
+        font-size: 300%;
+    }
+    .popup-content {
+        width: 90%;
+    }
+    .modal > .content{
+        font-size: 200%;
+    }
+
+}

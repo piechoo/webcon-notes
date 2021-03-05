@@ -9,13 +9,11 @@ class AddNoteForm extends Component {
         this.state = {
             title: '',
             tags: '',
-            content: '',
-            success: false
+            content: ''
         };
     }
 
     handleSubmit = async (event) => {
-        event.preventDefault();
         this.addnote()
     };
 
@@ -34,14 +32,11 @@ class AddNoteForm extends Component {
             .then(async response => {
                 const data = await response.json();
 
-                // check for error response
                 if (!response.ok) {
-                    // get error message from body or default to response status
                     const error = (data && data.message) || response.status;
                     return Promise.reject(error);
                 }
-                this.setState({ success: true })
-                alert("Dodano " + response.body)
+                alert("Dodano nową notatkę!")
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });
@@ -55,7 +50,6 @@ class AddNoteForm extends Component {
                 <label>Wpisz tytuł notatki:<br/></label>
                 <input
                     type="text"
-                    name="title"
                     onChange={event => this.setState({ title: event.target.value })}
                     placeholder="Tytuł "
                     required
@@ -66,7 +60,7 @@ class AddNoteForm extends Component {
                     type="text"
                     onChange={event => this.setState({ tags: event.target.value })}
                     placeholder="Tagi "
-                    required
+
                 />
                 <br/>
                 <label>Wpisz zawartość notatki:<br/></label>

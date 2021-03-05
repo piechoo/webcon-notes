@@ -4,24 +4,42 @@
     cursor: pointer;
 }
 .big{
-
-    padding: 2%;
-    margin: 0 auto;
-    width: 30%;
-    font-size: 1.5em;
+    padding: 1% 1%;
+    width: 40%;
+    margin: 2% auto;
+    font-size: 140%;
     border-radius: 30px;
 }
 .giga{
     margin-bottom: 3%;
 }
 .small{
-    width: 50%;
+    padding: 2%;
+    width: 90%;
     font-size: 1em;
     border-radius: 15px;
+}
+.container{
+    margin: 2% 0;
 }
 
 .text-link {
     color: inherit;
     text-decoration: inherit;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        margin: 5% 0;
+    }
+    .big{
+        padding: 3%;
+        width: 80%;
+        margin-bottom:5% ;
+    }
+    .small{
+        font-size: 110%;
+    }
 
 }

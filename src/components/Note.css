@@ -1,23 +1,23 @@
 .note{
     background-color: #c1d3fe;
     text-align: center;
-    margin: 0px 10px;
-    border-radius: 4px;
+    margin: 0px 15%;
+    border-radius: 6px;
 }
 .content {
     width: 80%;
-    display:table-cell;
     float: left;
+    font-size: 120%;
 }
 .buttons{
     vertical-align: top;
-    width:30%;
-    display:table-cell;
+    width:20%;
+    float: right;
 }
 .buttons button{
     display: block;
-    margin-bottom: 2%;
-
+    margin-bottom: 4%;
+    margin-left: 2%;
 }
 input[type="checkbox"] {
     position: absolute;
@@ -45,18 +45,52 @@ input[type="checkbox"] {
 }
 table{
     width: 100%;
-    border: 1px solid black;
-    border-radius: 4px;
+    border: 1px solid #22577a;
+    border-radius: 6px;
     table-layout: fixed;
     display: table;
+
 }
- th {
-    padding: 5px;
+table tr th:nth-child(1){
+    width: 80%;
 }
  .title{
      cursor: pointer;
+     font-size: 150%;
  }
 
+@media only screen and (max-width: 600px) {
 
+    .collapse > .content{
+        width: 90%;
+        font-size: 120%;
+        padding: 0 5%;
+    }
 
+    .collapse.in {
+        overflow:auto;
+    }
+    .content {
+        width: 100%;
+        font-size: 120%;
+    }
+    .buttons{
+        width:80%;
+        float: none;
+        margin: 0 0 0 10%;
+    }
+    .buttons button{
+        width: 100%;
+        display: block;
+        margin-bottom: 2%;
+        margin-left: 0;
+    }
 
+}
+
+@media only screen and (max-width: 1025px) {
+
+    .note {
+        margin: 0px 5%;
+    }
+}

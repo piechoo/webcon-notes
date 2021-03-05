@@ -6,7 +6,7 @@ class AddNoteButton extends React.Component {
 
     render() {
         return (
-            <div className=" big ">
+            <div className="container">
                 <Link to="/createnote" className='text-link buton big' > <b>+</b> Dodaj nową notatkę</Link>
             </div>
         );

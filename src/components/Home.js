@@ -1,23 +1,19 @@
 import React, {Component} from "react";
 import {Multiselect} from "multiselect-react-dropdown";
-import SearchBar from "./SearchBar";
 import AddNoteButton from "./AddNoteButton";
 import NoteList from "./NoteList";
 import "./Home.css"
 
 class Home extends Component {
 
-
     constructor(props) {
         super(props);
-
         this.state = {
             tags: [],
             selectedTag:'',
             err: null,
             isLoading: false,
         };
-
         this.onSelect=this.onSelect.bind(this)
         this.onRemove=this.onRemove.bind(this)
     }
@@ -37,9 +33,10 @@ class Home extends Component {
             })
             .then(tags => {
                     let tagi = tags;
-                    tags.push("Polubione Notatki")
+                    tagi = tagi.filter(item => item !== '')
+                    tagi.unshift("Polubione Notatki")
                     this.setState({
-                        tags,
+                        tags:tagi,
                         isLoading: false
                     })},
                 err => {
@@ -55,9 +52,6 @@ class Home extends Component {
             selectedTag: selectedItem
         })
 
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.state.selectedTag)
     }
 
     onRemove(selectedList, removedItem) {

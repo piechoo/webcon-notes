@@ -13,8 +13,7 @@ class ModalEditNote extends Component {
             fav: '',
             title: '',
             tags: '',
-            content: '',
-            success: 'tag'
+            content: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -32,11 +31,11 @@ class ModalEditNote extends Component {
             fav: this.props.fav,
         });
     }
-    handleSubmit = async (fc) => {
-        this.editnote(fc)
+    handleSubmit = async (close) => {
+        this.editnote(close)
     };
 
-    editnote= (fc) => {
+    editnote= (close) => {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -51,6 +50,7 @@ class ModalEditNote extends Component {
         fetch(`http://localhost:3000/notes/${this.state.id}`, requestOptions)
             .then(async response => {
                 this.props.handler()
+                close()
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });
@@ -73,7 +73,7 @@ class ModalEditNote extends Component {
                         <div className="header"> Edytuj notatkę </div>
                         <div className="content">
                             <form onSubmit={()=>{this.handleSubmit(close())}}>
-                                <label>Wpisz tytuł notatki:<br/></label>
+                                <label >Wpisz tytuł notatki:<br/></label>
                                 <input
                                     type="text"
                                     onChange={event => this.setState({ title: event.target.value })}
@@ -86,7 +86,7 @@ class ModalEditNote extends Component {
                                     type="text"
                                     onChange={event => this.setState({ tags: event.target.value })}
                                     value={this.state.tags}
-                                    required
+
                                 />
                                 <br/>
                                 <label>Wpisz zawartość notatki:<br/></label>
